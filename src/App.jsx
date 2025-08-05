@@ -1,4 +1,4 @@
-import { CanvasWrapper } from '@isaac_ua/drei-html-fix'
+import { Canvas } from '@react-three/fiber'
 import { Suspense, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { IoArrowBack } from "react-icons/io5";
@@ -64,22 +64,19 @@ const App = () => {
       </button>
 
       {/* Canvas */}
-      <CanvasWrapper
-        canvasProps={
-          {
-            camera: {
-              fov: 45,
-              near: 0.1,
-              far: 150,
-              position: isMobile ? cameraInitialPosition.mobile : cameraInitialPosition.desktop,
-            }
-          }
-        }
+      <Canvas
+        camera={{
+          fov: 45,
+          near: 0.1,
+          far: 150,
+          position: isMobile ? cameraInitialPosition.mobile : cameraInitialPosition.desktop,
+        }}
+        style={{ position: 'absolute', top: 0, left: 0 }}
       >
         <Suspense fallback={null}>
           <Experience isNight={isNight} isCameraFocused={isCameraFocused} setIsCameraFocused={setIsCameraFocused} isMobile={isMobile} />
         </Suspense>
-      </CanvasWrapper>
+      </Canvas>
       <Loader 
         containerStyles={{
           backgroundColor: 'oklch(0.44 0.02 229.29)',
